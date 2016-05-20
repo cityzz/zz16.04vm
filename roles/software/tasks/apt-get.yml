@@ -1,0 +1,58 @@
+---
+- name: Install aptitude
+  apt: name=aptitude state=present
+  become: yes
+  become_method: sudo
+
+- name: Add git PPA key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: E1DF1F24
+    state: present
+
+- name: Add git PPA
+  apt_repository:
+    repo: "deb http://ppa.launchpad.net/git-core/ppa/ubuntu {{ ansible_distribution_release }} main "
+    state: present
+
+- name: Update cache and packages to the latest
+  apt: update_cache=yes upgrade=full
+  become: yes
+  become_method: sudo
+
+- name: Install the required apt packages
+  apt: name={{ item }} state=present
+  with_items:
+    - alsa-base
+    - alsa-utils
+    - audacity
+    - automake
+    - baobab
+    - bless
+    - cmake
+    - cowsay
+    - ffmpeg
+    - g++
+    - gcc
+    - git
+    - gnome-tweak-tool
+    - guake
+    - htop
+    - imagemagick
+    - irssi
+    - llvm
+    - meld
+    - mosh
+    - portaudio19-dev
+    - pulseaudio
+    - sox
+    - swig
+    - sonic-visualiser
+    - subversion
+    - terminator
+    - tmux
+    - vim
+    - vlc
+    - wine
+  become: yes
+  become_method: sudo

@@ -1,0 +1,5 @@
+---
+
+- include: apt-get.yml
+- include: python.yml
+- include: atom.yml

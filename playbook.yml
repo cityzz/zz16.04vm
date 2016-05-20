@@ -1,0 +1,10 @@
+---
+- hosts: all
+  remote_user: "{{ vm_user }}"
+  become: yes
+  strategy: linear
+
+  roles:
+    - system
+    - software
+    - personalisation

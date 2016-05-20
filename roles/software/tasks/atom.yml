@@ -1,0 +1,39 @@
+---
+
+- name: Download Atom
+  get_url:
+    url: "{{ atom_pkg }}"
+    dest: /tmp/atom.deb
+    mode: 0755
+
+- name: Install Atom
+  apt: deb=/tmp/atom.deb
+  become: yes
+  become_method: sudo
+
+- name: Install Atom packages
+  apm:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - atom-jinja2
+    - autocomplete-paths
+    - autocomplete-python
+    - ex-mode
+    - file-icons
+    - git-plus
+    - minimap
+    - pipe
+    - python-indent
+    - python-tools
+    - scroll-percentage
+    - symbols-tree-view
+    - tabularize
+    - vim-mode
+  become: yes
+  become_user: "{{ vm_user }}"
+
+- name: Configure jj for vim mode
+  copy:
+    src: atom-keymap.cson
+    dest: "/home/{{ vm_user }}/.atom/keymap.cson"

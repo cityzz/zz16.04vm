@@ -1,0 +1,6 @@
+---
+
+- name: Copy .gitconfig file
+  copy:
+    src: .gitconfig
+    dest: "/home/{{ vm_user }}/.gitconfig"

@@ -1,0 +1,5 @@
+---
+- name: Copy htop configuration
+  copy:
+    src: htoprc
+    dest: "/home/{{ vm_user }}/.config/htop/htoprc"

@@ -1,0 +1,15 @@
+---
+- name: Copy bash related files
+  copy:
+    src: "{{ item }}"
+    dest: "/home/{{ vm_user }}/{{ item }}"
+  with_items:
+    - .bash_prompt.sh
+    - .bash_aliases
+
+- name: Source bash prompt on steroids
+  lineinfile:
+    dest: "/home/{{ vm_user }}/.bashrc"
+    regexp: bash_prompt.sh
+    line: source ~/.bash_prompt.sh
+    state: present

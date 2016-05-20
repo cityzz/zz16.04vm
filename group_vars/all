@@ -1,0 +1,6 @@
+---
+# Sudo password
+ansible_sudo_pass: lacol
+
+# User
+vm_user: local

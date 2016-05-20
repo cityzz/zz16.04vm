@@ -1,0 +1,9 @@
+---
+
+- include: bash.yml
+- include: git.yml
+- include: htop.yml
+- include: terminator.yml
+- include: tmux.yml
+- include: unity.yml
+- include: vim.yml

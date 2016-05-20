@@ -1,0 +1,15 @@
+[color]
+    status = true
+[alias]
+    st = status
+    lol = log --graph --oneline --decorate --all --branches --remotes --tags
+    co = checkout
+    ci = commit
+    br = checkout -b
+    unstage = reset HEAD --
+    amen = commit --amen
+    rst = checkout --
+    spull = svn rebase
+    spush = svn dcommit
+    info = svn info
+    di = "!f() { if [ $# -eq 0  ]; then git diff HEAD^ HEAD; else git diff $1^ $1; fi  }; f"

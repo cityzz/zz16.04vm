@@ -1,0 +1,10 @@
+---
+- name: Clone TPM for tmux
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
+
+- name: Copy tmux configuration
+  copy:
+    src: .tmux.conf
+    dest: "/home/{{ vm_user }}/.tmux.conf"

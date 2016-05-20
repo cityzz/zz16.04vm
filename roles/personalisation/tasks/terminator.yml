@@ -1,0 +1,10 @@
+---
+- name: Create directory for terminator configuration
+  file:
+    path: "/home/{{ vm_user }}/.config/terminator"
+    state: directory
+
+- name: Copy terminator configuration
+  copy:
+    src: terminator_config
+    dest: "/home/{{ vm_user }}/.config/terminator/config"

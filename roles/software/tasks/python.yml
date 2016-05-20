@@ -1,0 +1,28 @@
+---
+- name: Download Anaconda 64-bit
+  get_url:
+    url: "{{ anaconda_pkg }}"
+    dest: /tmp/Anaconda2-Linux-x86_64.sh
+    mode: 0755
+
+- name: Install Anaconda
+  command: /tmp/Anaconda2-Linux-x86_64.sh -b -p /home/adrian/anaconda2
+  args:
+      creates: /home/{{ vm_user }}/anaconda2
+  become: yes
+  become_user: "{{ vm_user }}"
+
+- name: Make sure that Anaconda is in the PATH
+  lineinfile:
+    dest: "/home/{{ vm_user }}/.bashrc"
+    regexp: /home/{{ vm_user }}/anaconda2/bin
+    line: export PATH="/home/{{ vm_user }}/anaconda2/bin:$PATH"
+    state: present
+
+- name: Install pip packages
+  pip: executable=/home/{{ vm_user }}/anaconda2/bin/pip name={{ item }}
+  with_items:
+   - pyaudio
+   - pyqtgraph
+   - pyinter
+   - scons

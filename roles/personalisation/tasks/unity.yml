@@ -1,0 +1,106 @@
+---
+- name: Create themes directory
+  file:
+    state: directory
+    path: /usr/share/themes
+  become: yes
+  become_method: sudo
+
+- name: Download flatabulous
+  get_url:
+    url: https://github.com/anmoljagetia/Flatabulous/archive/master.zip
+    dest: /usr/share/themes/Flatabulous.zip
+  become: yes
+  become_method: sudo
+
+- name: Extract Flatabulous
+  unarchive:
+    src: /usr/share/themes/Flatabulous.zip
+    dest: /usr/share/themes
+    creates: /usr/share/themes/Flatabulous-master
+    copy: no
+  become: yes
+  become_method: sudo
+
+- name: Set GTK theme
+  gsettings:
+    schema: org.gnome.desktop.interface
+    key: gtk-theme
+    value: 'Flatabulous-master'
+  become: yes
+  become_user: "{{ vm_user }}"
+
+- name: Add noobslab PPA key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: F59EAE4D
+    state: present
+
+- name: Add noobslab PPA
+  apt_repository:
+    repo: "deb http://ppa.launchpad.net/noobslab/icons/ubuntu {{ ansible_distribution_release }} main "
+    state: present
+
+- name: Install ultra-flat icons theme
+  apt:
+    name: ultra-flat-icons
+    state: present
+    update_cache: yes
+  become: yes
+  become_method: sudo
+
+- name: Set icon Theme
+  gsettings:
+    schema: org.gnome.desktop.interface
+    key: icon-theme
+    value: 'Ultra-Flat'
+  become: yes
+  become_user: "{{ vm_user }}"
+
+- name: Enable minimize on click
+  gsettings:
+    schema: org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/
+    key: launcher-minimize-window
+    value: 'true'
+  become: yes
+  become_user: "{{ vm_user }}"
+
+- name: Move the launcher to the bottom
+  gsettings:
+    schema: com.canonical.Unity.Launcher
+    key: launcher-position
+    value: 'Bottom'
+  become: yes
+  become_user: "{{ vm_user }}"
+
+- name: Show the date
+  gsettings:
+    schema: org.gnome.desktop.interface
+    key: clock-show-date
+    value: 'true'
+  become: yes
+  become_user: "{{ vm_user }}"
+
+- name: List Folder View
+  gsettings:
+    schema: org.gnome.nautilus.preferences
+    key: default-folder-viewer
+    value: 'list-view'
+  become: yes
+  become_user: "{{ vm_user }}"
+
+- name: Always show menu
+  gsettings:
+    schema: com.canonical.Unity
+    key: always-show-menus
+    value: 'true'
+  become: yes
+  become_user: "{{ vm_user }}"
+
+- name: Move menu back to the window
+  gsettings:
+    schema: com.canonical.Unity
+    key: integrated-menus
+    value: 'true'
+  become: yes
+  become_user: "{{ vm_user }}"
