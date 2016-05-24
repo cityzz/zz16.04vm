@@ -5,5 +5,5 @@
   remote_user: "{{ vm_user }}"
 
   tasks:
-  - name: Add RSA key to the remote host
-    authorized_key: user="{{ vm_user }}" key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  - name: Add SSH key to the remote host
+    authorized_key: user="{{ vm_user }}" key="{{ lookup('file', '~/.ssh/id_lepus.pub') }}"

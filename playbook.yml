@@ -1,4 +1,8 @@
 ---
+# Before running it, need to run ssh_setup.yml
+# Setup ~/.ssh/config on your control machine
+# Setup the hosts file of your ansible
+# Run ansible-playbook playbook.yml
 - hosts: all
   remote_user: "{{ vm_user }}"
   become: yes
