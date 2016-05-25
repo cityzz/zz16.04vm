@@ -6,7 +6,7 @@
     mode: 0755
 
 - name: Install Anaconda
-  command: /tmp/Anaconda2-Linux-x86_64.sh -b -p /home/adrian/anaconda2
+  command: /tmp/Anaconda2-Linux-x86_64.sh -b -p /home/{{ vm_user }}/anaconda2
   args:
       creates: /home/{{ vm_user }}/anaconda2
   become: yes
