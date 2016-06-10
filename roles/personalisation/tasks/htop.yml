@@ -1,4 +1,9 @@
 ---
+- name: Create htop configuration directory
+  file:
+    path: "/home{{ vm_user }}/.config/htop"
+    state: directory
+
 - name: Copy htop configuration
   copy:
     src: htoprc
